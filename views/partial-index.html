@@ -1,0 +1,10 @@
+<div>
+    <ul>
+        ${data.map(restaurant => { return `
+        <li><a href='/restaurants/${restaurant.slug}'>
+        <h2>${restaurant.restaurant_name}</h2></a>
+        ${restaurant.food_category}.
+            </li>
+            <br>`}).join('')}
+    </ul>
+</div>
