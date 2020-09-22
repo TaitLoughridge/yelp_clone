@@ -16,6 +16,7 @@ router.get('/:name?', async (req, res) => {
                 title: `Welcome to`,
                 data: restaurantDetails,
                 reviewData: restaurantData,
+                
             },
             partials: {
                 partial: "partial-reviews"

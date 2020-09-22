@@ -1,7 +1,7 @@
 const db = require('./conn');
 
 class RestaurantList {
-    constructor (restaurant_name, food_category, favorite_dish, title, stars, review, reviewer_name, slug){
+    constructor (restaurant_name, food_category, favorite_dish, title, stars, review, reviewer_name, slug, reviewer_id,restaurant_id){
         this.restaurant_name = restaurant_name
         this.food_category = food_category
         this.favorite_dish = favorite_dish
@@ -10,6 +10,8 @@ class RestaurantList {
         this.review = review
         this.reviewer_name = reviewer_name
         this.slug = slug
+        this.reviewer_id = reviewer_id
+        this.restaurant_id = restaurant_id
     }
     static async getRestaurant () {
         try {
@@ -29,11 +31,11 @@ class RestaurantList {
         }
     }
 
-    static async createReview (title, review, stars, reviewer_id, restaurant_id) {
+    static async createReview (title, review, stars, restaurant_id) {
         try{
-            const response = await db.result(`
+            const response = await db.one(`
             INSERT INTO reviews (title, review, stars, reviewer_id, restaurant_id)
-            VALUES ($1, $2, $3, $4, $5);`, [title, review, stars, reviewer_id, restaurant_id],
+            VALUES ($1, $2, $3, $4, $5) RETURNING id;`, [title, review, stars, 1, restaurant_id],
             );
             return response;
         } catch (error) {

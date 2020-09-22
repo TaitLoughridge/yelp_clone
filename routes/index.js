@@ -8,6 +8,7 @@ const express = require('express'),
             locals: {
                 title: "Welcome",
                 data: restaurantDetails,
+                
             },
             partials: {
                 partial: "partial-index"
